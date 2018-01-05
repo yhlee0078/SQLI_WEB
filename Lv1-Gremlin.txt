@@ -1,5 +1,19 @@
 ﻿Lodr Of Sql Injection gremlin 
 
+<?php
+  include "./config.php";
+  login_chk();
+  dbconnect();
+  if(preg_match('/prob|_|\.|\(\)/i', $_GET[id])) exit("No Hack ~_~"); // do not try to attack another table, database!
+  if(preg_match('/prob|_|\.|\(\)/i', $_GET[pw])) exit("No Hack ~_~");
+  $query = "select id from prob_gremlin where id='{$_GET[id]}' and pw='{$_GET[pw]}'";
+  echo "<hr>query : <strong>{$query}</strong><hr><br>";
+  $result = @mysql_fetch_array(mysql_query($query));
+  if($result['id']) solve("gremlin");
+  highlight_file(__FILE__);
+?>
+
+
 ? 기호가 PHP 에서 URL과 파라미터를 구분
 
 -> 입력해줄 때 ? 기호로 변수(parameter)를 받기 시작하고
